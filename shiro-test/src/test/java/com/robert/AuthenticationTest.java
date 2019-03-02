@@ -70,6 +70,9 @@ public class AuthenticationTest {
         jdbcRealm.setDataSource(druidDataSource);
         securityManager.setRealm(jdbcRealm);
 
+        jdbcRealm.setAuthenticationQuery("select userpassword from test_users where username=?");
+
+        jdbcRealm.setUserRolesQuery("select rolename from test_users_roles where username=?");
 
         SecurityUtils.setSecurityManager(securityManager);
         Subject subject = SecurityUtils.getSubject();
